@@ -35,6 +35,9 @@ main [id]{scroll-margin-top:84px}
 .btn-p{background:var(--a);color:#fff;box-shadow:0 14px 30px -12px var(--a)}
 .btn-g{border-color:var(--line);background:var(--surface)}.btn-g:hover{border-color:var(--b)}
 .btn-s{padding:9px 16px;font-size:.84rem}
+/* resume download icon (bigger) */
+.dl{display:inline-block;font-size:1.45em;line-height:1;font-weight:700;vertical-align:middle}
+.btn-resume .dl{font-size:1.5em}
 
 /* hero */
 .hero{position:relative;padding:72px 0 64px;background:radial-gradient(760px 460px at 82% 6%,color-mix(in srgb,var(--a) 28%,transparent),transparent 70%)}
@@ -118,21 +121,25 @@ main [id]{scroll-margin-top:84px}
 .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
 .pills span{font:.74rem var(--mono);padding:5px 11px;border-radius:7px;border:1px solid var(--line);color:var(--soft)}
 
-/* work */
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
-.card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:20px;background:var(--surface);overflow:hidden;transition:transform .25s,border-color .25s}
+/* work: horizontal cards, image one side + details other side */
+.grid{display:grid;grid-template-columns:1fr;gap:26px}
+.card{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;border:1px solid var(--line);border-radius:20px;background:var(--surface);overflow:hidden;transition:transform .25s,border-color .25s}
 .card:hover{transform:translateY(-4px);border-color:var(--accent,var(--b))}
-.media{aspect-ratio:16/9;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 45%,#0B0B12),color-mix(in srgb,var(--accent) 12%,#0B0B12));display:grid;place-items:center;overflow:hidden}
-.media img{width:100%;height:100%;object-fit:cover;object-position:top}
-.media b{font:700 2rem var(--display);color:rgba(255,255,255,.85)}
-.body{padding:22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card:nth-child(even) .media{order:2}
+.media{min-height:340px;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 45%,#0B0B12),color-mix(in srgb,var(--accent) 12%,#0B0B12));display:grid;place-items:center;overflow:hidden}
+.media img{width:100%;height:100%;object-fit:cover;object-position:center}
+.body{padding:34px;display:flex;flex-direction:column;justify-content:center;gap:14px}
 .ctag{font:.72rem var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.05em}
-.card h3{font-size:1.4rem}.hook{color:var(--soft);font-size:.94rem}
+.card h3{font-size:1.6rem}.hook{color:var(--soft);font-size:.96rem}
 .links{display:flex;gap:16px;margin-top:4px}
 .links a{font-size:.86rem;font-weight:600;border-bottom:1px solid var(--muted);padding-bottom:1px}.links a:hover{color:var(--b);border-color:var(--b)}
 details{margin-top:auto;padding-top:12px;border-top:1px solid var(--line)}
 summary{cursor:pointer;font-size:.86rem;font-weight:600;color:var(--soft)}
-details p{margin-top:10px;font-size:.9rem;color:var(--soft)}
+.card.noimg{grid-template-columns:1fr;border-left:4px solid var(--accent)}
+.pts{display:grid;gap:9px;color:var(--soft);font-size:.94rem}
+.pts li{padding-left:22px;position:relative}
+.pts li:before{content:"→";position:absolute;left:0;color:var(--accent)}
+.pts b{color:var(--ink)}
 
 /* contact */
 .cta{text-align:center;padding:96px 0;background:radial-gradient(600px 300px at 50% 0,color-mix(in srgb,var(--a) 18%,transparent),transparent 70%)}
@@ -144,10 +151,11 @@ footer{border-top:1px solid var(--line);padding:24px 0 calc(24px + env(safe-area
 /* contact (coloured section) */
 .csec{background:#EC6845;color:#17151F;padding:72px 0 92px}
 .crow{display:flex;gap:14px;flex-wrap:wrap}
-.cb{padding:22px 34px;border-radius:10px;font:600 1.1rem var(--display);border:2px solid rgba(23,21,31,.45);color:#17151F;transition:transform .2s,background .2s}
+.cb{display:inline-flex;align-items:center;gap:10px;padding:22px 34px;border-radius:10px;font:600 1.1rem var(--display);border:2px solid rgba(23,21,31,.45);color:#17151F;transition:transform .2s,background .2s}
 .cb:hover{transform:translateY(-3px);background:rgba(23,21,31,.08)}
 .cb.pri{background:#12121A;border-color:#12121A;color:#FF9B7A;box-shadow:0 14px 28px -14px rgba(0,0,0,.6)}
 .cb.pri:hover{background:#12121A}
+.cb .dl{font-size:1.6em}
 .cdiv{height:1px;background:rgba(23,21,31,.25);margin:44px 0}
 .cgrid{display:grid;grid-template-columns:1fr 1.35fr;gap:32px;align-items:start}
 .info{display:grid;gap:14px}
@@ -162,7 +170,7 @@ footer{border-top:1px solid var(--line);padding:24px 0 calc(24px + env(safe-area
 .send{margin-top:26px;background:#E24E26;color:#fff;border:0;border-radius:10px;padding:14px 28px;font:600 1rem var(--body);cursor:pointer;transition:transform .2s}
 .send:hover{transform:translateY(-2px)}
 .fs{display:block;margin-top:14px;font-size:.92rem;color:#9be9a8}
-@media(max-width:860px){.cgrid,.fr{grid-template-columns:1fr}.cb{padding:16px 22px;font-size:1rem;flex:1 1 40%;text-align:center}.csec{padding:52px 0 64px}.fm{padding:22px}}
+@media(max-width:860px){.cgrid,.fr{grid-template-columns:1fr}.cb{padding:16px 22px;font-size:1rem;flex:1 1 40%;justify-content:center;text-align:center}.csec{padding:52px 0 64px}.fm{padding:22px}}
 /* reveal: transform + opacity only */
 .js .rv{opacity:0;transform:translateY(18px);transition:opacity .5s ease-out,transform .5s ease-out}
 .js .rv.in{opacity:1;transform:none}
@@ -173,7 +181,8 @@ footer{border-top:1px solid var(--line);padding:24px 0 calc(24px + env(safe-area
 .sec{padding:64px 0}}
 @media(max-width:760px){
 .nav{display:none}.grid{grid-template-columns:1fr}.stats .inner{grid-template-columns:1fr 1fr}
-.hero{padding:44px 0}.tile{width:68px}.tile i{width:54px;height:54px}.stage{padding:22px}.btn-resume{display:none}}
+.hero{padding:44px 0}.tile{width:68px}.tile i{width:54px;height:54px}.stage{padding:22px}.btn-resume{display:none}
+.card{grid-template-columns:1fr}.card:nth-child(even) .media{order:0}.media{aspect-ratio:16/9;min-height:0}.body{padding:22px}}
 </style>
 </head>
 <body>
@@ -185,7 +194,7 @@ footer{border-top:1px solid var(--line);padding:24px 0 calc(24px + env(safe-area
     <a href="#top" class="nl">Home</a><a href="#expertise" class="nl">Expertise</a><a href="#work" class="nl">Work</a><a href="#experience" class="nl">Experience</a><a href="#contact" class="nl">Contact</a>
   </nav>
   <button class="tt" id="theme" aria-label="Toggle light / dark theme">☾</button>
-  <a href="CHARMI_TRIVEDI_RESUME.pdf" download class="btn btn-g btn-s btn-resume">Résumé</a>
+  <a href="./src/CHARMI-REACTNATIVE.pdf" download="Charmi-Trivedi-Resume.pdf" class="btn btn-g btn-s btn-resume"><span class="dl">⤓</span> Resume</a>
 </div></header>
 
 <main>
@@ -193,10 +202,10 @@ footer{border-top:1px solid var(--line);padding:24px 0 calc(24px + env(safe-area
   <div>
     <p class="eyebrow">React Native Developer — iOS &amp; Android</p>
     <h1 class="name"><span>Charmi</span><span class="ol">Trivedi</span></h1>
-    <p class="tag">Turning Figma designs into pixel-perfect React Native apps that ship — and hold up after launch.</p>
+    <p class="tag">Turning Figma designs — or just your requirements — into pixel-perfect React Native apps that ship and hold up after launch.</p>
     <div class="chips">
       <span class="chip">🕐 <span id="clock">--:--:--</span> IST · Ahmedabad</span>
-      <span class="chip av"><span class="dot"></span>Open to freelance</span>
+      <span class="chip av"><span class="dot"></span>Open to Work</span>
     </div>
     <div class="tiles" role="list" aria-label="Technologies I work with">
       <div class="tile" role="listitem" style="--c:#0B1521"><i><svg viewBox="-12 -12 24 24" fill="none" stroke="#61DAFB" stroke-width="1.2"><ellipse rx="10" ry="4"/><ellipse rx="10" ry="4" transform="rotate(60)"/><ellipse rx="10" ry="4" transform="rotate(120)"/><circle r="1.8" fill="#61DAFB" stroke="none"/></svg></i>React Native</div>
@@ -221,7 +230,7 @@ footer{border-top:1px solid var(--line);padding:24px 0 calc(24px + env(safe-area
   role: <span class="s">"React Native Developer"</span>,
   stack: [<span class="s">"React Native"</span>, <span class="s">"TypeScript"</span>, <span class="s">"Redux"</span>],
   shipped: <span class="s">"6 apps, iOS + Android"</span>,
-  status: <span class="s">"open_to_freelance"</span>
+  status: <span class="s">"open_to_work"</span>
 };</pre>
     </div>
   </div>
@@ -258,15 +267,15 @@ footer{border-top:1px solid var(--line);padding:24px 0 calc(24px + env(safe-area
   <div class="sh rv"><h2>From Figma to the store, end to end.</h2><p>Four areas I work in daily — each tied to a real app I've shipped.</p></div>
   <div class="md rv" data-tabs>
     <div class="mdn" role="tablist">
-      <button class="mdb on" role="tab"><strong>UI from Figma</strong><small>Pixel-perfect screens</small></button>
+      <button class="mdb on" role="tab"><strong>UI Design &amp; Figma</strong><small>From Figma or from requirements</small></button>
       <button class="mdb" role="tab"><strong>State &amp; APIs</strong><small>Redux Toolkit · Axios</small></button>
       <button class="mdb" role="tab"><strong>Integrations</strong><small>Payments · Maps · Push</small></button>
       <button class="mdb" role="tab"><strong>Performance</strong><small>Smooth on every device</small></button>
     </div>
     <div>
-      <div class="stage on"><h3>UI from Figma</h3><p>Responsive, pixel-perfect Android and iOS screens built from Figma designs, with reusable components, form validation and loaders throughout.</p>
-        <ul><li>Neev Ethnic: collapsing sticky header and a redesigned filter drawer</li><li>SYCF: three role-based experiences from one component library</li></ul>
-        <div class="pills"><span>React Native</span><span>Figma → RN</span><span>React Navigation</span></div></div>
+      <div class="stage on"><h3>UI Design &amp; Figma</h3><p>When a Figma design is provided, I build pixel-perfect Android &amp; iOS screens from it. When there is no design, I create the app's UI/UX myself from the client's requirements.</p>
+        <ul><li>Convert Figma designs into responsive, pixel-perfect React Native screens</li><li>Designed the complete UI/UX from client requirements and built all 3 TheFabApp apps</li><li>Reusable components, form validation and loaders; 3 role-based experiences in SYCF</li></ul>
+        <div class="pills"><span>Figma → RN</span><span>UI/UX Design</span><span>Reusable Components</span><span>React Navigation</span></div></div>
       <div class="stage"><h3>State &amp; APIs</h3><p>REST API integration with Axios and predictable state with Redux Toolkit, with proper loading and error states on every request.</p>
         <ul><li>Async thunks for API requests in the Supply App</li><li>Dedicated Redux slice for notifications with mark-all-read</li></ul>
         <div class="pills"><span>Redux Toolkit</span><span>Axios</span><span>TypeScript</span><span>REST API</span></div></div>
@@ -286,39 +295,62 @@ footer{border-top:1px solid var(--line);padding:24px 0 calc(24px + env(safe-area
   <div class="grid">
     <article class="card rv" style="--accent:#FF6B57">
       <div class="media"><img src="./src/assets/images/mix.png" alt="Neev Ethnic screens" loading="lazy" decoding="async"></div>
-      <div class="body"><span class="ctag">E-commerce · Customer app</span><h3>Neev Ethnic</h3>
-        <p class="hook">An ethnic-wear shopping app where I own the customer experience — home, filters, checkout and the community feed.</p>
+      <div class="body"><span class="ctag">E-commerce · Customer, Business &amp; Admin</span><h3>Neev Ethnic</h3>
+        <p class="hook">Role-based ethnic fashion e-commerce app with three dedicated roles — Customer, Business and Admin — each with separate login flows and role-specific UI.</p>
         <div class="pills"><span>React Native</span><span>TypeScript</span><span>Redux Toolkit</span><span>Razorpay</span></div>
-        <details><summary>Behind the build</summary><p>Sticky home header that collapses on scroll, a redesigned filter drawer, and a Razorpay checkout with wallet top-ups and single-select payment methods. Also built the community feed (post creation, live-ads carousel, fullscreen zoom) and notifications with a dedicated Redux slice.</p></details></div>
+        <div class="links"><a href="https://play.google.com/store/apps/details?id=com.neevethnic" target="_blank" rel="noopener">Play Store ↗</a><a href="https://apps.apple.com/in/app/neevethnic/id6798973406" target="_blank" rel="noopener">App Store ↗</a></div>
+        <details><summary>Behind the build</summary>
+          <ul class="pts" style="margin-top:12px">
+            <li>Role-based authentication and access control with separate features and permissions per role</li>
+            <li><b>Customer module:</b> product browsing, cart, checkout, order tracking, order history, profile and settings</li>
+            <li><b>Business module:</b> shop owners manage product catalog, inventory, orders, coupons and store profile</li>
+            <li><b>Admin module:</b> manage products, orders, users and Business accounts across the platform</li>
+            <li>State and user data with Redux Toolkit; form validation, loading states, API error handling and secure auth flows</li>
+          </ul></details></div>
     </article>
     <article class="card rv" style="--accent:#8B5CFF">
-      <div class="media"><img src="./src/assets/images/sycf/user.png" alt="SYCF screens" loading="lazy" decoding="async"></div>
+      <div class="media"><img src="./src/assets/images/sycf/mix.png" alt="SYCF screens" loading="lazy" decoding="async"></div>
       <div class="body"><span class="ctag">Booking &amp; management</span><h3>SYCF</h3>
-        <p class="hook">Sankalp Yuva Cultural Foundation's hotel booking app with separate User, Admin and Trustee roles.</p>
+        <p class="hook">Role-based hotel booking and management app with separate access for Admin, Trustee and User — covering booking, property management and donation workflows.</p>
         <div class="pills"><span>React Native</span><span>Redux Toolkit</span><span>Axios</span><span>Role-based auth</span></div>
         <div class="links"><a href="https://play.google.com/store/apps/details?id=com.sycf" target="_blank" rel="noopener">Play Store ↗</a><a href="https://apps.apple.com/in/app/sycf/id6759457228" target="_blank" rel="noopener">App Store ↗</a></div>
-        <details><summary>Behind the build</summary><p>Each role has its own secure login and permissions. I integrated the REST APIs with Axios, managed state with Redux Toolkit, and built the UI from Figma with reusable components, form validation and loaders throughout.</p></details></div>
+        <details><summary>Behind the build</summary>
+          <ul class="pts" style="margin-top:12px">
+            <li>Role-based authentication for User, Admin and Trustee with secure login flows</li>
+            <li><b>User:</b> hotel booking, booking details and cancellation, profile, change password, settings</li>
+            <li><b>Admin:</b> manage properties, rooms, bookings, activities and trustee accounts</li>
+            <li><b>Trustee:</b> manage bookings, generate and share coupons, donations, EMI and directory</li>
+            <li>REST APIs with Axios, data managed with Redux Toolkit; responsive UI from Figma using reusable components</li>
+          </ul></details></div>
     </article>
-    <article class="card rv" style="--accent:#00E5C7">
-      <div class="media"><b>Supply App</b></div>
+    <article class="card noimg rv" style="--accent:#00E5C7">
       <div class="body"><span class="ctag">Supplier management</span><h3>Supply App</h3>
-        <p class="hook">Full CRUD for products and services, with REST integration and async-thunk state.</p>
-        <div class="pills"><span>Redux Toolkit</span><span>TypeScript</span><span>Firebase</span><span>Google Location</span></div>
-        <details><summary>Behind the build</summary><p>RESTful API integration with Redux Toolkit async thunks, plus form validation, loading states and error handling — tested on both Android and iOS.</p></details></div>
+        <p class="hook">A supplier management app that lets suppliers manage their products and services, with full CRUD functionality, seamless API integration and a user-friendly interface.</p>
+        <ul class="pts">
+          <li>Integrated RESTful APIs to perform CRUD operations for supplier data</li>
+          <li>Redux Toolkit for state management, with async thunks for API requests</li>
+          <li>Form validation, loading states and error handling for a smooth user experience</li>
+          <li>Optimised performance and tested on both Android and iOS devices</li>
+        </ul>
+        <div class="pills"><span>React Native</span><span>Redux Toolkit</span><span>Axios</span><span>TypeScript</span><span>REST API</span><span>React Navigation</span><span>Firebase Notification</span><span>Google Location</span></div></div>
     </article>
-    <article class="card rv" style="--accent:#FFC24B">
-      <div class="media"><b>TheFabApp</b></div>
+    <article class="card noimg rv" style="--accent:#FFC24B">
       <div class="body"><span class="ctag">Booking &amp; service · 3 apps</span><h3>TheFabApp</h3>
-        <p class="hook">Driver, Customer and Employee apps covering the complete booking and service flow.</p>
-        <div class="pills"><span>Redux</span><span>Google Maps API</span><span>Push Notifications</span></div>
-        <details><summary>Behind the build</summary><p>Designed and built the UI/UX for all three apps, wired up Redux for state and API connections, and added push notifications on every side for job start-to-finish updates.</p></details></div>
+        <p class="hook">Three separate apps — Driver, Customer and Employee — covering the complete booking and service flow.</p>
+        <ul class="pts">
+          <li>Designed and implemented complete UI/UX for all three apps</li>
+          <li>Redux for state management and API connections</li>
+          <li>Complete booking flow for both Customer and Employee apps, integrated with APIs</li>
+          <li>Push notifications across Driver, Employee and Customer apps for job start-to-end updates</li>
+        </ul>
+        <div class="pills"><span>React Native</span><span>Redux</span><span>Axios</span><span>Google Maps API</span><span>Firebase Push Notifications</span></div></div>
     </article>
   </div>
 </div></section>
 
 <section class="sec" id="experience"><div class="inner">
   <div class="label rv"><i>04</i><span>Where I've worked</span></div>
-  <div class="sh rv"><h2>Growing from feature work to owning modules.</h2></div>
+  <div class="sh rv"><h2>Built with teams, grown through experience.</h2><p>From Figma designs or client requirements — from idea to store release.</p></div>
   <div class="md rv" data-tabs>
     <div class="mdn" role="tablist">
       <button class="mdb on" role="tab"><strong>TechnoAdviser Technologies</strong><small>Dec 2025 – Present</small></button>
@@ -326,12 +358,15 @@ footer{border-top:1px solid var(--line);padding:24px 0 calc(24px + env(safe-area
       <button class="mdb" role="tab"><strong>Angel Infotech</strong><small>Oct 2023 – Dec 2024</small></button>
     </div>
     <div>
-      <div class="stage on"><h3>React Native Developer</h3><p>TechnoAdviser Technologies Pvt. Ltd · Ahmedabad</p>
-        <ul><li>Own reusable components and app architecture for Neev Ethnic's customer app</li><li>Integrate REST APIs with Axios, with proper loading and error states</li><li>Convert Figma designs into pixel-perfect, responsive screens</li><li>Optimise performance with FlatList, memoisation and efficient rendering</li></ul></div>
-      <div class="stage"><h3>React Native Developer</h3><p>Stellermind.Ai · Ahmedabad</p>
-        <ul><li>Cross-platform app development with REST/Axios integration</li><li>State management with Redux &amp; Redux Toolkit</li><li>Third-party library and native module integration</li></ul></div>
-      <div class="stage"><h3>React Native Developer</h3><p>Angel Infotech · Rajkot</p>
-        <ul><li>Firebase, Facebook and Google authentication</li><li>Built a chat application and the Junno Express app</li></ul></div>
+      <div class="stage on"><h3>React Native Developer</h3><p>TechnoAdviser Technologies Pvt. Ltd · Ahmedabad · Dec 2025 – Present</p>
+        <ul><li>Convert Figma UI/UX designs into pixel-perfect, responsive mobile screens, and design the UI myself when the client gives only requirements</li><li>Created reusable components and followed clean, scalable architecture</li><li>Integrated RESTful APIs using Axios with proper error and loading state handling</li><li>State management with Redux &amp; Redux Toolkit</li><li>Integrated third-party libraries and native modules as per project requirements</li><li>Optimised app performance using FlatList, memoisation and efficient rendering</li></ul>
+        <div class="pills"><span>React Native</span><span>Redux Toolkit</span><span>Axios</span><span>Figma</span></div></div>
+      <div class="stage"><h3>React Native Developer</h3><p>Stellermind.Ai · Ahmedabad · Apr 2025 – Nov 2025</p>
+        <ul><li>Cross-platform mobile app development with React Native</li><li>API integration (REST, Axios)</li><li>State management with Redux &amp; Redux Toolkit</li><li>Third-party libraries and native module integration</li><li>UI/UX implementation from Figma designs</li></ul>
+        <div class="pills"><span>React Native</span><span>Redux</span><span>Axios</span><span>Figma</span></div></div>
+      <div class="stage"><h3>React Native Developer</h3><p>Angel Infotech · Rajkot · Oct 2023 – Dec 2024</p>
+        <ul><li>Redux for state management</li><li>Firebase authentication, plus Facebook and Google authentication</li><li>Built a chat application and the Junno Express app</li></ul>
+        <div class="pills"><span>React Native</span><span>Redux</span><span>Firebase</span></div></div>
     </div>
   </div>
   <p class="rv" style="margin-top:28px;color:var(--muted);font-size:.9rem">Education: M.Sc IT — H.N.S College, 2024 · B.C.A — M.V.M College, 2020</p>
@@ -339,7 +374,7 @@ footer{border-top:1px solid var(--line);padding:24px 0 calc(24px + env(safe-area
 
 <section class="csec" id="contact"><div class="inner">
   <div class="crow rv">
-    <a class="cb pri" href="CHARMI_TRIVEDI_RESUME.pdf" download>Download Résumé</a>
+    <a class="cb pri" href="./src/CHARMI-REACTNATIVE.pdf" download="Charmi-Trivedi-Resume.pdf"><span class="dl">⤓</span> Download Resume</a>
     <a class="cb" href="mailto:charmitrivedi7202@gmail.com">Email Me</a>
     <a class="cb" href="https://www.linkedin.com/in/charmi-trivedi-15a88519b" target="_blank" rel="noopener">LinkedIn</a>
     <a class="cb" href="https://github.com/charmi1234" target="_blank" rel="noopener">GitHub</a>
@@ -349,7 +384,7 @@ footer{border-top:1px solid var(--line);padding:24px 0 calc(24px + env(safe-area
     <div class="info">
       <div class="ic"><span class="ico">✉</span><div><small>Email</small>charmitrivedi7202@gmail.com</div></div>
       <div class="ic"><span class="ico">💬</span><div><small>Phone / WhatsApp</small>+91 92650 04504</div></div>
-      <div class="ic"><span class="ico">📍</span><div><small>Availability</small>Open to freelance React Native work | Ahmedabad, India</div></div>
+      <div class="ic"><span class="ico">📍</span><div><small>Availability</small>Open to Work · React Native Developer | Ahmedabad, India</div></div>
     </div>
     <form class="fm" id="cform">
       <div class="fr">
@@ -411,7 +446,7 @@ if(matchMedia('(hover:hover)').matches){document.querySelectorAll('.stat').forEa
   function d(){pend=false;c.style.setProperty('--mx',x+'px');c.style.setProperty('--my',y+'px')}
   c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();x=e.clientX-r.left;y=e.clientY-r.top;if(!pend){pend=true;requestAnimationFrame(d)}},{passive:true});
 })}
-// contact form -> opens mail app (no backend needed on github.io)
+// contact form
 var cf=document.getElementById('cform'),st=document.getElementById('fstat'),sb=cf.querySelector('.send');
 cf.addEventListener('submit',function(e){e.preventDefault();
   var g=function(i){return document.getElementById(i).value.trim()};
